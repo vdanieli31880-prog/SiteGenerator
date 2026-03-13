@@ -15,12 +15,12 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/", // on redirigera sur l'accueil ou on fera une page de login dédiée
+    signIn: "/",
   },
+  debug: true, // Ajout du mode debug pour voir l'erreur exacte dans les logs Railway
   callbacks: {
     async session({ session, token }) {
       if (token && session.user) {
-        // Optionnel: on peut attacher l'ID de l'utilisateur à la session
         (session.user as any).id = token.sub;
       }
       return session;
