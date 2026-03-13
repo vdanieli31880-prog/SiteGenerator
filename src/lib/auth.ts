@@ -14,10 +14,11 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/",
   },
-  debug: true, // Ajout du mode debug pour voir l'erreur exacte dans les logs Railway
+  debug: true,
   callbacks: {
     async session({ session, token }) {
       if (token && session.user) {
