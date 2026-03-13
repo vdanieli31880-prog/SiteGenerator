@@ -11,10 +11,19 @@ export default async function EditorPage({ params }: { params: { siteId: string 
     redirect("/");
   }
 
+  // Next.js 15+ : les paramètres de route `params` peuvent être asynchrones
+  // Si on y accède directement et que ce n'est pas encore résolu, Prisma reçoit `undefined`.
+  // On s'assure de l'extraire correctement. (Bien que TypeScript dans les versions récentes recommande await params)
+  const siteId = await Promise.resolve(params.siteId);
+
+  if (!siteId) {
+    redirect("/dashboard");
+  }
+
   // Vérification que le site existe et appartient à l'utilisateur
   const site = await prisma.site.findUnique({
     where: {
-      id: params.siteId,
+      id: siteId,
     },
   });
 
