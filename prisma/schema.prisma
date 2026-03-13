@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -29,7 +30,6 @@ model Site {
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  // Le fameux JSON qui contient la couleur, les textes du Hero, etc.
   config      Json?    @default("{}")
   
   createdAt   DateTime @default(now())
@@ -38,7 +38,6 @@ model Site {
   @@index([userId])
 }
 
-// Requis pour NextAuth
 model Account {
   id                 String  @id @default(cuid())
   userId             String
