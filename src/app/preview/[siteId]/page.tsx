@@ -71,6 +71,56 @@ export default async function PreviewPage({ params }: { params: Promise<{ siteId
              </button>
           </div>
        </section>
+    
+       {/* Valeurs / Features */}
+       <section className="py-20 bg-slate-50" id="valeurs">
+         <div className="max-w-6xl mx-auto px-4 space-y-12">
+           <div className="max-w-2xl">
+             <p className={`text-sm font-semibold uppercase tracking-[0.35em] ${primaryText}`}>Notre Philosophie</p>
+             <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">L'amour du bon produit.</h2>
+           </div>
+           <div className="grid gap-6 md:grid-cols-3">
+             {[1, 2, 3].map((i) => (
+               <div key={i} className="border border-slate-200 bg-white rounded-xl p-6 shadow-sm">
+                 <div className={`w-12 h-12 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center ${primaryText} mb-4`}>
+                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                 </div>
+                 <h3 className="text-xl font-semibold text-slate-900 mb-2">Engagement n°{i}</h3>
+                 <p className="text-slate-600">Texte d'exemple pour montrer comment s'affichent les valeurs de votre établissement.</p>
+               </div>
+             ))}
+           </div>
+         </div>
+       </section>
+
+       {/* Le Chef */}
+       <section className="py-20 bg-white" id="chef">
+         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+           <div className="aspect-square bg-slate-100 rounded-3xl overflow-hidden border border-slate-200">
+             <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chef" className="w-full h-full object-cover" />
+           </div>
+           <div className="space-y-6">
+             <p className={`text-sm font-semibold uppercase tracking-[0.35em] ${primaryText}`}>L'Équipe</p>
+             <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">Rencontrez notre Chef.</h2>
+             <p className="text-lg text-slate-600">Passé par les plus grandes cuisines étoilées de la capitale, notre Chef a décidé de revenir à l'essentiel : une cuisine de bistrot, généreuse et sans artifices.</p>
+             <div className="pt-4 flex items-center gap-4">
+               <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=200&q=80" alt="Plat" className="w-20 h-20 rounded-full object-cover shadow-md" />
+               <p className="text-sm text-slate-500 font-medium italic">Le plat signature : Daurade rôtie et ses légumes</p>
+             </div>
+           </div>
+         </div>
+       </section>
+
+       {/* Footer CTA */}
+       <section className="py-24 bg-slate-900 text-center px-4" id="reservation">
+         <div className="max-w-4xl mx-auto space-y-8">
+           <p className="text-sm uppercase tracking-[0.4em] text-slate-400">L'expérience vous tente ?</p>
+           <h2 className="text-3xl font-semibold text-white sm:text-4xl">Réservez votre table</h2>
+           <button className={`${primaryBg} text-white px-8 py-4 rounded-xl font-medium shadow-lg hover:opacity-90 transition-opacity mt-8`}>
+             Réserver en ligne
+           </button>
+         </div>
+       </section>
     </div>
   )
 }
