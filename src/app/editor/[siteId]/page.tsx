@@ -43,7 +43,7 @@ export default async function EditorPage({ params }: { params: Promise<{ siteId:
           <h1 className="font-semibold text-slate-900">{site.name}</h1>
         </div>
         <div className="flex items-center gap-3">
-          <a href={`/preview/${site.id}`} target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200">
+          <a href={site.subdomain ? `/site/${site.subdomain}` : `/preview/${site.id}`} target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200">
             Voir le site en plein écran
           </a>
           {/* Note: Save button moved to the client component sidebar for direct access to state */}
