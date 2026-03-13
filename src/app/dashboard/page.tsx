@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { CreateSiteButton } from "@/components/CreateSiteButton"
+import { DeleteSiteButton } from "@/components/DeleteSiteButton"
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
