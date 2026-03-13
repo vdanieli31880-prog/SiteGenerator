@@ -32,9 +32,16 @@ export async function POST(req: Request) {
       }
     };
 
+    
+    // Générer un sous-domaine basique (ex: "Le Petit Bouchon" -> "le-petit-bouchon-randomID")
+    const baseDomain = name.trim().toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    const randomSuffix = Math.random().toString(36).substring(2, 6);
+    const subdomain = `${baseDomain}-${randomSuffix}`;
+
     const site = await prisma.site.create({
       data: {
         name: name.trim(),
+        subdomain: subdomain,
         userId: (session.user as any).id,
         config: defaultConfig,
       },
