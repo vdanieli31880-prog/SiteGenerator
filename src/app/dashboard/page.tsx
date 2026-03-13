@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
+import { CreateSiteButton } from "@/components/CreateSiteButton"
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
@@ -48,12 +49,7 @@ export default async function DashboardPage() {
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">Vos Sites</h2>
             <p className="text-slate-600 mt-1">Gérez vos landing pages et leurs configurations.</p>
           </div>
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-lg font-medium shadow-sm shadow-indigo-500/30 transition-all flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-            </svg>
-            Créer un nouveau site
-          </button>
+          <CreateSiteButton />
         </div>
 
         {userSites.length === 0 ? (
@@ -75,7 +71,7 @@ export default async function DashboardPage() {
                 <div className="h-32 bg-slate-100 border-b border-slate-100 flex items-center justify-center relative">
                   <span className="text-slate-400 font-medium">Aperçu indisponible</span>
                   <div className="absolute inset-0 bg-indigo-600/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
-                    <button className="bg-white text-indigo-600 font-medium px-4 py-2 rounded-lg shadow-sm">Éditer le site</button>
+                    <a href={`/editor/${site.id}`} className="bg-white text-indigo-600 font-medium px-4 py-2 rounded-lg shadow-sm">Éditer le site</a>
                   </div>
                 </div>
                 <div className="p-5">
@@ -86,12 +82,12 @@ export default async function DashboardPage() {
                   <p className="text-sm text-slate-500 mb-4">{site.subdomain ? `${site.subdomain}.sitegenerator.app` : 'Non configuré'}</p>
                   <div className="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
                     <span>Mis à jour le {new Date(site.updatedAt).toLocaleDateString()}</span>
-                    <button className="hover:text-indigo-600 transition-colors">
+                    <a href={`/editor/${site.id}`} className="hover:text-indigo-600 transition-colors">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
