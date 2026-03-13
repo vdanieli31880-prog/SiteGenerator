@@ -4,17 +4,16 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
-export default async function EditorPage({ params }: { params: { siteId: string } }) {
+export default async function EditorPage({ params }: { params: Promise<{ siteId: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
     redirect("/");
   }
 
-  // Next.js 15+ : les paramètres de route `params` peuvent être asynchrones
-  // Si on y accède directement et que ce n'est pas encore résolu, Prisma reçoit `undefined`.
-  // On s'assure de l'extraire correctement. (Bien que TypeScript dans les versions récentes recommande await params)
-  const siteId = await Promise.resolve(params.siteId);
+  // Next.js 15: `params` is a Promise that resolves to the actual params object
+  const resolvedParams = await params;
+  const siteId = resolvedParams.siteId;
 
   if (!siteId) {
     redirect("/dashboard");
@@ -27,7 +26,14 @@ export default async function EditorPage({ params }: { params: { siteId: string 
     },
   });
 
-  if (!site || site.userId !== (session.user as any).id) {
+  // Pour débugger, si ça fail ici, ça redirige au dashboard.
+  if (!site) {
+    console.error("Site introuvable:", siteId);
+    redirect("/dashboard");
+  }
+
+  if (site.userId !== (session.user as any).id) {
+    console.error("L'utilisateur", (session.user as any).id, "n'est pas proprio du site", site.userId);
     redirect("/dashboard");
   }
 
