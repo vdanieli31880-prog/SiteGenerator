@@ -73,14 +73,19 @@ export default async function EditorPage({ params }: { params: Promise<{ siteId:
                 <input 
                   type="text" 
                   defaultValue={site.name}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">Couleur Principale</label>
                 <div className="flex gap-2">
-                  {['orange', 'indigo', 'emerald', 'rose'].map(color => (
-                    <button key={color} className={`w-8 h-8 rounded-full border-2 border-white shadow-sm ring-2 ${color === 'orange' ? 'ring-slate-300 bg-orange-500' : 'ring-transparent bg-'+color+'-500'}`} title={color}></button>
+                  {[
+                    { name: 'orange', class: 'bg-orange-500' },
+                    { name: 'indigo', class: 'bg-indigo-500' },
+                    { name: 'emerald', class: 'bg-emerald-500' },
+                    { name: 'rose', class: 'bg-rose-500' }
+                  ].map(color => (
+                    <button key={color.name} className={`w-8 h-8 rounded-full border-2 border-white shadow-sm ring-2 ${color.name === 'orange' ? 'ring-slate-300 ' + color.class : 'ring-transparent ' + color.class}`} title={color.name}></button>
                   ))}
                 </div>
               </div>
@@ -91,7 +96,7 @@ export default async function EditorPage({ params }: { params: Promise<{ siteId:
                     <label className="block text-xs text-slate-500 mb-1">Titre principal</label>
                     <textarea 
                       defaultValue={(site.config as any)?.hero?.title || ""}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm h-20 resize-none"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm h-20 resize-none text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     ></textarea>
                   </div>
                   <div>
@@ -99,7 +104,7 @@ export default async function EditorPage({ params }: { params: Promise<{ siteId:
                     <input 
                       type="text" 
                       defaultValue={(site.config as any)?.hero?.ctaPrimary || ""}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                 </div>
