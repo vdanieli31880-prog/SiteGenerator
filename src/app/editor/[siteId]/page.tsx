@@ -126,9 +126,13 @@ export default async function EditorPage({ params }: { params: Promise<{ siteId:
                 {site.subdomain ? `${site.subdomain}.sitegenerator.app` : 'brouillon.sitegenerator.app'}
               </div>
             </div>
-            <div className="flex-1 flex items-center justify-center bg-slate-50">
-              <p className="text-slate-400 text-sm">Zone de rendu en direct (Iframe à venir dans la Phase 4)</p>
-            </div>
+            <div className="flex-1 bg-white relative">
+        <iframe 
+          src={`/preview/${site.id}`} 
+          className="absolute inset-0 w-full h-full border-0"
+          title="Aperçu du site"
+        />
+      </div>
           </div>
         </main>
       </div>
